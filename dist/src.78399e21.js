@@ -31619,7 +31619,7 @@ var define;
 	}
 }());
 
-},{}],"App/DeseoList/DeseoList.jsx":[function(require,module,exports) {
+},{}],"App/DeseoItem/DeseoItem.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31635,41 +31635,91 @@ var _classnames = _interopRequireDefault(require("classnames"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const DeseoList = ({
-  deseos
-}) => _react.default.createElement("ul", {
-  className: "deseo-lista"
-}, deseos.map(({
+const DeseoItem = ({
   text,
-  done
-}, i) => _react.default.createElement("li", {
+  done,
+  id,
+  onDoneChange
+}) => _react.default.createElement("li", {
   className: (0, _classnames.default)('deseo-lista__item', {
     'deseo-lista__item--done': done
   }),
   key: text
 }, _react.default.createElement("label", {
   className: "deseo-lista-label",
-  htmlFor: `deseo${i}`
+  htmlFor: `deseo${id}`
 }, _react.default.createElement("input", {
   className: "deseo-lista__field",
   type: "checkbox",
-  name: "",
+  id: `deseo${id}`,
+  checked: done,
+  onChange: e => onDoneChange(e.target.checked)
+}), text));
+
+DeseoItem.propTypes = {
+  text: _propTypes.default.string,
+  done: _propTypes.default.bool,
+  id: _propTypes.default.string,
+  onDoneChange: _propTypes.default.func
+};
+DeseoItem.defaultProps = {
+  text: 'no encontrado',
+  done: false,
+  id: '',
+  onDoneChange: () => {}
+};
+var _default = DeseoItem;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","classnames":"../node_modules/classnames/index.js"}],"App/DeseoList/DeseoList.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _DeseoItem = _interopRequireDefault(require("../DeseoItem/DeseoItem"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const DeseoList = ({
+  deseos,
+  cuandoCambiaDeseo
+}) => _react.default.createElement("ul", {
+  className: "deseo-lista"
+}, deseos.map(({
+  text,
+  done
+}, i) => _react.default.createElement(_DeseoItem.default, {
+  text: text,
+  done: done,
   id: `deseo${i}`,
-  checked: done
-}), text))));
+  key: text,
+  onDoneChange: valor => {
+    const actualeDeseos = [...deseos];
+    actualeDeseos[i].done = valor;
+    cuandoCambiaDeseo(actualeDeseos);
+  }
+})));
 
 DeseoList.propTypes = {
   deseos: _propTypes.default.arrayOf(_propTypes.default.shape({
     done: _propTypes.default.bool,
     text: _propTypes.default.string
-  }))
+  })),
+  cuandoCambiaDeseo: _propTypes.default.func
 };
 DeseoList.defaultProps = {
-  deseos: []
+  deseos: [],
+  cuandoCambiaDeseo: () => {}
 };
 var _default = DeseoList;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","classnames":"../node_modules/classnames/index.js"}],"App/App.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","../DeseoItem/DeseoItem":"App/DeseoItem/DeseoItem.jsx"}],"App/App.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31744,7 +31794,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49404" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58314" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

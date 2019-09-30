@@ -1,27 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import DeseoItem from '../DeseoItem/DeseoItem';
 
-const DeseoList = ({ deseos }) => (
+const DeseoList = ({ deseos, cuandoCambiaDeseo }) => (
   <ul className="deseo-lista">
     {deseos.map(({ text, done }, i) => (
-      <li
-        className={classNames('deseo-lista__item', {
-          'deseo-lista__item--done': done,
-        })}
+      <DeseoItem
+        text={text}
+        done={done}
+        id={`deseo${i}`}
         key={text}
-      >
-        <label className="deseo-lista-label" htmlFor={`deseo${i}`}>
-          <input
-            className="deseo-lista__field"
-            type="checkbox"
-            name=""
-            id={`deseo${i}`}
-            checked={done}
-          />
-          {text}
-        </label>
-      </li>
+        onDoneChange={valor => {
+          const actualeDeseos = [...deseos];
+          actualeDeseos[i].done = valor;
+          cuandoCambiaDeseo(actualeDeseos);
+        }}
+      />
     ))}
   </ul>
 );
@@ -33,10 +27,12 @@ DeseoList.propTypes = {
       text: PropTypes.string,
     }),
   ),
+  cuandoCambiaDeseo: PropTypes.func,
 };
 
 DeseoList.defaultProps = {
   deseos: [],
+  cuandoCambiaDeseo: () => {},
 };
 
 export default DeseoList;
