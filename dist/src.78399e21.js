@@ -30609,45 +30609,7 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"../node_modules/react-dom/cjs/react-dom.development.js"}],"App/DeseoInput/DeseoInput.jsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const DeseoInput = () => _react.default.createElement("fieldset", {
-  className: "deseo-input"
-}, _react.default.createElement("legend", {
-  className: "deseo-input__label"
-}, "Nuevo deseo"), _react.default.createElement("input", {
-  className: "deseo-input__field",
-  placeholder: "Introduzca su deseo",
-  type: "text"
-}));
-
-var _default = DeseoInput;
-exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"App/DeseoInput/index.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _DeseoInput = _interopRequireDefault(require("./DeseoInput"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _default = _DeseoInput.default;
-exports.default = _default;
-},{"./DeseoInput":"App/DeseoInput/DeseoInput.jsx"}],"../node_modules/react-is/cjs/react-is.development.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"../node_modules/react-dom/cjs/react-dom.development.js"}],"../node_modules/react-is/cjs/react-is.development.js":[function(require,module,exports) {
 /** @license React v16.9.0
  * react-is.development.js
  *
@@ -31564,7 +31526,73 @@ if ("development" !== 'production') {
   // http://fb.me/prop-types-in-prod
   module.exports = require('./factoryWithThrowingShims')();
 }
-},{"react-is":"../node_modules/react-is/index.js","./factoryWithTypeCheckers":"../node_modules/prop-types/factoryWithTypeCheckers.js"}],"../node_modules/classnames/index.js":[function(require,module,exports) {
+},{"react-is":"../node_modules/react-is/index.js","./factoryWithTypeCheckers":"../node_modules/prop-types/factoryWithTypeCheckers.js"}],"App/DeseoInput/DeseoInput.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+const DeseoInput = ({
+  siNuevoDeseo
+}) => {
+  const [nuevoDeseoTexto, setNuevoDeseoTexto] = (0, _react.useState)('');
+  return _react.default.createElement("fieldset", {
+    className: "deseo-input"
+  }, _react.default.createElement("legend", {
+    className: "deseo-input__label"
+  }, "Nuevo deseo"), _react.default.createElement("input", {
+    className: "deseo-input__field",
+    placeholder: "Introduzca su deseo",
+    type: "text",
+    value: nuevoDeseoTexto,
+    onChange: e => setNuevoDeseoTexto(e.target.value),
+    onKeyUp: e => {
+      if (e.key === 'Enter' && nuevoDeseoTexto.length) {
+        siNuevoDeseo({
+          done: false,
+          text: nuevoDeseoTexto
+        });
+        setNuevoDeseoTexto('');
+      }
+    }
+  }));
+};
+
+DeseoInput.propTypes = {
+  siNuevoDeseo: _propTypes.default.func
+};
+DeseoInput.defaultProps = {
+  siNuevoDeseo: () => {}
+};
+var _default = DeseoInput;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js"}],"App/DeseoInput/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _DeseoInput = _interopRequireDefault(require("./DeseoInput"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = _DeseoInput.default;
+exports.default = _default;
+},{"./DeseoInput":"App/DeseoInput/DeseoInput.jsx"}],"../node_modules/classnames/index.js":[function(require,module,exports) {
 var define;
 /*!
   Copyright (c) 2017 Jed Watson.
@@ -31739,7 +31767,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-const initialDeseos = [{
+const deseosIniciales = [{
   text: 'Viajar a la luna',
   done: false
 }, {
@@ -31751,8 +31779,10 @@ const initialDeseos = [{
 }];
 
 const App = () => {
-  const [deseos, setDeseos] = (0, _react.useState)(initialDeseos);
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("h1", null, "Lista de deseos"), _react.default.createElement(_DeseoInput.default, null), _react.default.createElement(_DeseoList.default, {
+  const [deseos, setDeseos] = (0, _react.useState)(deseosIniciales);
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("h1", null, "Lista de deseos"), _react.default.createElement(_DeseoInput.default, {
+    siNuevoDeseo: deseo => setDeseos([deseo, ...deseos])
+  }), _react.default.createElement(_DeseoList.default, {
     deseos: deseos,
     cuandoCambiaDeseo: setDeseos
   }), _react.default.createElement("button", {
@@ -31802,7 +31832,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49429" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49334" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
