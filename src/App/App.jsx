@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './App.css';
 import DeseoInput from './DeseoInput';
 import DeseoList from './DeseoList/DeseoList';
 
